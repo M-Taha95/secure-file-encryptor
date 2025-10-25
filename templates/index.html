@@ -1,140 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Secure File Encryption & Decryption Tool</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- HEADER -->
-    <header class="hero">
-      <div class="hero-content">
-        <h1>Secure File Encryption & Decryption Tool</h1>
-        <p>
-          Protect your sensitive files with AES-GCM encryption — built with
-          Python and Flask
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure File Encryption & Decryption Tool</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+  <!-- HERO / HEADER -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Secure File Encryption &amp; Decryption Tool</h1>
+      <p>Protecting digital data through advanced cryptography — built with Python and Flask</p>
+
+      <div class="hero-badges">
+        <div class="badge-pill">AES-256-GCM</div>
+        <div class="badge-pill">PBKDF2 (390,000 iterations)</div>
+        <div class="badge-pill">Local-Only Processing</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- OVERVIEW -->
+  <section class="section-box">
+    <div class="section-content two-col">
+      <div class="col-left">
+        <h2 class="section-title">📘 Project Overview</h2>
+        <p class="section-text">
+          This tool demonstrates how modern cryptography can protect data privacy.
+          It supports all common file types — documents, images, audio, video, archives —
+          and allows the user to encrypt or decrypt files locally without uploading them
+          to any external server.
+        </p>
+        <p class="section-text">
+          The system supports two modes: a human password (stretched using PBKDF2)
+          or a strong randomly generated keyfile. Both are compatible with AES-GCM,
+          providing confidentiality and integrity.
         </p>
       </div>
-    </header>
 
-    <!-- PROJECT OVERVIEW -->
-    <section class="overview">
-      <h2>📘 Project Overview</h2>
-      <p>
-        This tool demonstrates how advanced cryptography can protect your
-        personal and confidential data. It supports all file types — text,
-        documents, images, audio, and videos — and ensures data privacy through
-        local-only processing.
+      <div class="col-right diagram-card">
+        <!-- You can replace the placeholder below with an actual <img> -->
+        <!-- Example: <img src="{{ url_for('static', filename='password_vs_keyfile.png') }}" alt="Password vs Keyfile Diagram" /> -->
+        <div class="diagram-header">
+          <div class="diagram-title">Password-based Encryption vs Keyfile-based Encryption</div>
+        </div>
+
+        <div class="diagram-grid">
+          <!-- Password-based side -->
+          <div class="diagram-side">
+            <div class="diagram-side-head">
+              <div class="diagram-icon">🔒</div>
+              <div class="diagram-side-title">Password-based</div>
+            </div>
+
+            <ul class="diagram-steps">
+              <li><strong>User enters a password</strong></li>
+              <li>PBKDF2 derives a strong cryptographic key (with salt + iterations)</li>
+              <li>File is encrypted under the derived key (AES-256-GCM)</li>
+            </ul>
+          </div>
+
+          <!-- Keyfile-based side -->
+          <div class="diagram-side">
+            <div class="diagram-side-head">
+              <div class="diagram-icon">🔑</div>
+              <div class="diagram-side-title">Keyfile-based</div>
+            </div>
+
+            <ul class="diagram-steps">
+              <li><strong>User provides a .key file</strong></li>
+              <li>The .key file already contains a random 32-byte AES key</li>
+              <li>File is encrypted under that exact key (AES-256-GCM)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="diagram-note">
+          In both modes, the result is an <code>.enc</code> file that can only be decrypted
+          with the correct password <em>or</em> the matching keyfile.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE TOOL / FORM -->
+  <section class="section-box alt-bg">
+    <div class="section-content narrow">
+      <h2 class="section-title center">🛠 Try It Now</h2>
+      <p class="section-text center">
+        Your file never leaves this machine. All encryption/decryption is done in memory.
       </p>
-    </section>
 
-    <!-- ENCRYPTION FORM -->
-    <section class="encrypt-section">
-      <h2>🛠️ Try It Now</h2>
-      <div class="card">
-        <form method="POST" action="/process" enctype="multipart/form-data">
-          <label>File</label>
-          <input type="file" name="file" required />
+      <div class="app-card">
+        <form method="POST" action="/process" enctype="multipart/form-data" class="app-form">
+          <label class="input-label">File</label>
+          <input class="input-field" type="file" name="file" required>
 
-          <label>Password</label>
-          <input type="password" name="password" placeholder="Enter password" />
+          <label class="input-label">Password (optional if using keyfile)</label>
+          <input class="input-field" type="password" name="password" placeholder="Enter password">
 
-          <label>Or Keyfile (.key)</label>
-          <input type="file" name="keyfile" accept=".key" />
+          <label class="input-label">Or Keyfile (.key)</label>
+          <input class="input-field" type="file" name="keyfile" accept=".key">
 
-          <label>Action</label>
-          <select name="action" required>
+          <label class="input-label">Action</label>
+          <select class="input-field" name="action" required>
             <option value="encrypt">Encrypt</option>
             <option value="decrypt">Decrypt</option>
           </select>
 
-          <button type="submit" class="primary">Process File</button>
+          <button type="submit" class="btn primary-btn">Process File</button>
         </form>
 
         <form action="/generate-key" method="GET">
-          <button type="submit" class="secondary">Generate New Keyfile</button>
+          <button type="submit" class="btn secondary-btn">Generate New Keyfile</button>
         </form>
 
-        {% with messages = get_flashed_messages() %} {% if messages %}
-        <ul class="error">
-          {% for msg in messages %}
-          <li>{{ msg }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %} {% endwith %}
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="error-box">
+              {% for msg in messages %}
+                <li>{{ msg }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
       </div>
-    </section>
 
-    <!-- FEATURES -->
-    <section class="features">
-      <h2>🔐 Key Features</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>🧠 AES-GCM Encryption</h3>
-          <p>
-            Industry-standard AES encryption with authentication ensures data
-            confidentiality and tamper protection.
-          </p>
+      <div class="local-note">
+        🔐 Tip: Keep your .key file private. Without it, encrypted data cannot be recovered.
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section-box">
+    <div class="section-content">
+      <h2 class="section-title">🔐 Key Features</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-head">AES-GCM Encryption</div>
+          <div class="feature-desc">
+            Uses AES-256-GCM for confidentiality and integrity, preventing tampering and unauthorized access.
+          </div>
         </div>
-        <div class="card">
-          <h3>🔑 Password & Keyfile Options</h3>
-          <p>
-            Users can secure files using a password or a 32-byte symmetric key
-            file for maximum flexibility.
-          </p>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔑</div>
+          <div class="feature-head">Password &amp; Keyfile Modes</div>
+          <div class="feature-desc">
+            Encrypt/decrypt using a password (PBKDF2-derived) or a 32-byte symmetric keyfile you generate.
+          </div>
         </div>
-        <div class="card">
-          <h3>🧬 Key Derivation (PBKDF2)</h3>
-          <p>
-            Transforms weak passwords into strong cryptographic keys using
-            PBKDF2-HMAC-SHA256 with 390,000 iterations.
-          </p>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧬</div>
+          <div class="feature-head">PBKDF2 Key Derivation</div>
+          <div class="feature-desc">
+            Weak human passwords are stretched into strong keys using PBKDF2-HMAC-SHA256 with 390,000+ iterations.
+          </div>
         </div>
-        <div class="card">
-          <h3>💻 Local-Only Processing</h3>
-          <p>
-            All encryption and decryption occur locally, ensuring no data leaves
-            your computer.
-          </p>
+
+        <div class="feature-card">
+          <div class="feature-icon">💻</div>
+          <div class="feature-head">Local-Only Processing</div>
+          <div class="feature-desc">
+            No file is uploaded to a remote server. Everything happens in memory on your own machine.
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- TECH IMPLEMENTATION -->
-    <section class="tech">
-      <h2>⚙️ Technical Implementation</h2>
-      <p>
-        The backend uses <strong>Python Flask</strong> and the
-        <strong>cryptography</strong> library for AES-GCM encryption. The
-        frontend leverages HTML5 and CSS3 for a clean, modern experience.
+  <!-- TECH STACK -->
+  <section class="section-box alt-bg">
+    <div class="section-content">
+      <h2 class="section-title">⚙️ Technical Implementation</h2>
+
+      <p class="section-text">
+        The backend is written in <strong>Python (Flask)</strong> and uses the
+        <strong>cryptography</strong> library for AES-GCM encryption and PBKDF2-HMAC-SHA256
+        key derivation. The frontend is built with clean HTML5 and CSS3 for a responsive,
+        professional UI.
       </p>
 
-      <div class="stack">
-        <span class="badge">Python</span>
-        <span class="badge">Flask</span>
-        <span class="badge">AES-GCM</span>
-        <span class="badge">PBKDF2</span>
-        <span class="badge">HTML5</span>
-        <span class="badge">CSS3</span>
+      <div class="stack-row">
+        <div class="stack-badge">Python</div>
+        <div class="stack-badge">Flask</div>
+        <div class="stack-badge">AES-GCM</div>
+        <div class="stack-badge">PBKDF2</div>
+        <div class="stack-badge">HTML5</div>
+        <div class="stack-badge">CSS3</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
       <p>
-        Developed by <strong>Mohammed Taha</strong> — Cybersecurity Graduation
-        Project 2025
+        Developed by <strong>Mohammed Taha</strong> —
+        Cybersecurity Graduation Project 2025
       </p>
-    </footer>
-  </body>
+      <p class="footer-hint">
+        Educational use • Your data stays local • AES-256-GCM
+      </p>
+    </div>
+  </footer>
+
+</body>
 </html>
