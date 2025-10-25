@@ -83,7 +83,7 @@ secure-file-encryptor/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/secure-file-encryptor.git
+git clone https://github.com/M-Taha95/secure-file-encryptor.git
 cd secure-file-encryptor
 
 2️⃣ Create and Activate Virtual Environment
