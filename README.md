@@ -144,7 +144,7 @@ http://127.0.0.1:5000
 
 3 . Choose Decrypt → click Process File.
 
-4  .Your original file will be restored.
+4  . Your original file will be restored.
 
 🔒 Security Notes
 
@@ -170,22 +170,6 @@ Add a multi-language interface (English, Arabic).
 
 Mohammed Taha
 Cybersecurity Student — Applied Science University
-📧 Email: [your_email@example.com
-]
 📅 Year: 2025
 
-
----
-
-✅ **How to save it:**
-1. Open VS Code
-2. Create a new file in your project root
-3. Name it `README.md`
-4. Paste everything above into it
-5. Save the file
-
----
-
-Would you like me to also generate a **visual GitHub banner** (a modern header image for the top of your README) with your project title and theme colors?
-It makes your repository look very professional to employers and professors.
 ```
