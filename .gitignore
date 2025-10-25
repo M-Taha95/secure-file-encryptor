@@ -1,6 +1,4 @@
-# Ignore sensitive and unnecessary files
-
-.env.crypto
-*.env
-*.key
-
+venv/
+__pycache__/
+.env
+*.pyc

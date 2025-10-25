@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure File Encryption & Decryption Tool</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Secure File Encryption & Decryption Tool</h1>
+        <p>
+          Protect your sensitive files with AES-GCM encryption — built with
+          Python and Flask
+        </p>
+      </div>
+    </header>
+
+    <!-- PROJECT OVERVIEW -->
+    <section class="overview">
+      <h2>📘 Project Overview</h2>
+      <p>
+        This tool demonstrates how advanced cryptography can protect your
+        personal and confidential data. It supports all file types — text,
+        documents, images, audio, and videos — and ensures data privacy through
+        local-only processing.
+      </p>
+    </section>
+
+    <!-- ENCRYPTION FORM -->
+    <section class="encrypt-section">
+      <h2>🛠️ Try It Now</h2>
+      <div class="card">
+        <form method="POST" action="/process" enctype="multipart/form-data">
+          <label>File</label>
+          <input type="file" name="file" required />
+
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter password" />
+
+          <label>Or Keyfile (.key)</label>
+          <input type="file" name="keyfile" accept=".key" />
+
+          <label>Action</label>
+          <select name="action" required>
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+          </select>
+
+          <button type="submit" class="primary">Process File</button>
+        </form>
+
+        <form action="/generate-key" method="GET">
+          <button type="submit" class="secondary">Generate New Keyfile</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul class="error">
+          {% for msg in messages %}
+          <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <h2>🔐 Key Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🧠 AES-GCM Encryption</h3>
+          <p>
+            Industry-standard AES encryption with authentication ensures data
+            confidentiality and tamper protection.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🔑 Password & Keyfile Options</h3>
+          <p>
+            Users can secure files using a password or a 32-byte symmetric key
+            file for maximum flexibility.
+          </p>
+        </div>
+        <div class="card">
+          <h3>🧬 Key Derivation (PBKDF2)</h3>
+          <p>
+            Transforms weak passwords into strong cryptographic keys using
+            PBKDF2-HMAC-SHA256 with 390,000 iterations.
+          </p>
+        </div>
+        <div class="card">
+          <h3>💻 Local-Only Processing</h3>
+          <p>
+            All encryption and decryption occur locally, ensuring no data leaves
+            your computer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH IMPLEMENTATION -->
+    <section class="tech">
+      <h2>⚙️ Technical Implementation</h2>
+      <p>
+        The backend uses <strong>Python Flask</strong> and the
+        <strong>cryptography</strong> library for AES-GCM encryption. The
+        frontend leverages HTML5 and CSS3 for a clean, modern experience.
+      </p>
+
+      <div class="stack">
+        <span class="badge">Python</span>
+        <span class="badge">Flask</span>
+        <span class="badge">AES-GCM</span>
+        <span class="badge">PBKDF2</span>
+        <span class="badge">HTML5</span>
+        <span class="badge">CSS3</span>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Developed by <strong>Mohammed Taha</strong> — Cybersecurity Graduation
+        Project 2025
+      </p>
+    </footer>
+  </body>
+</html>

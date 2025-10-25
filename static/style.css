@@ -1,0 +1,145 @@
+/* GENERAL */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f9fb;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.hero {
+  background: linear-gradient(135deg, #004aad, #0077ff);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero h1 {
+  font-size: 2.8em;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 1.2em;
+  color: #dbe6ff;
+  max-width: 700px;
+  margin: 10px auto 0;
+}
+
+/* SECTION TITLES */
+section {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 25px;
+}
+h2 {
+  color: #004aad;
+  border-left: 5px solid #0077ff;
+  padding-left: 10px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* OVERVIEW */
+.overview p {
+  font-size: 1.05em;
+}
+
+/* ENCRYPTION FORM */
+.encrypt-section .card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  margin: 20px auto;
+  text-align: left;
+}
+label {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+}
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+}
+button.primary {
+  background: #0077ff;
+  color: white;
+}
+button.primary:hover {
+  background: #005ecb;
+}
+button.secondary {
+  background: #e8f0ff;
+  color: #004aad;
+  margin-top: 10px;
+}
+.error {
+  color: red;
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
+/* FEATURES GRID */
+.features .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card h3 {
+  color: #0077ff;
+  margin-bottom: 10px;
+}
+
+/* TECH STACK */
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.badge {
+  background-color: #e8f0ff;
+  color: #004aad;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #555;
+  border-top: 1px solid #ddd;
+  margin-top: 60px;
+  font-size: 0.95em;
+}
