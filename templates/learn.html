@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Encryption Lab | CyberKids</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='learn.css') }}">
+  <script defer src="{{ url_for('static', filename='learn.js') }}"></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">🔐 CyberKids</div>
+    <nav>
+      <a href="/">🏠 Home</a>
+      <a href="/learn" class="active">🎓 Learn</a>
+      <a href="/game">🎮 Game</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>🎓 Interactive Encryption Lab</h1>
+    <p>Learn by doing — experiment with encryption, decryption, and secret keys!</p>
+  </section>
+
+  <main class="learn-lab">
+    <div class="info-panel">
+      <h2 id="algo-title">🔠 Caesar Cipher</h2>
+      <p id="algo-desc">In Caesar Cipher, each letter is shifted a few places. A = D if shift = 3!</p>
+    </div>
+
+    <div class="controls">
+      <label>Choose Algorithm:</label>
+      <select id="algorithm">
+        <option value="caesar">Caesar Cipher</option>
+        <option value="xor">XOR Cipher</option>
+        <option value="reverse">Reverse Cipher</option>
+        <option value="base64">Base64 Encoding</option>
+        <option value="rot13">ROT13 Substitution</option>
+      </select>
+
+      <label>Key (only for Caesar or XOR):</label>
+      <input type="number" id="key" placeholder="e.g. 3" value="3">
+
+      <label>Enter Your Message:</label>
+      <input type="text" id="message" placeholder="Type your secret message...">
+
+      <div class="buttons">
+        <button id="encrypt">🔒 Encrypt</button>
+        <button id="decrypt">🔓 Decrypt</button>
+      </div>
+    </div>
+
+    <div class="output-panel">
+      <h3>Result:</h3>
+      <div id="result" class="result-box">Your encrypted/decrypted message will appear here</div>
+    </div>
+
+    <div class="animation-zone">
+      <img src="{{ url_for('static', filename='assets/lock.png') }}" alt="Lock" id="lock">
+      <img src="{{ url_for('static', filename='assets/unlock.png') }}" alt="Unlock" id="unlock">
+      <img src="{{ url_for('static', filename='assets/spark.gif') }}" alt="Spark" id="spark">
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 CyberKids | Interactive Encryption Learning Platform by Mohammed Taha</p>
+  </footer>
+</body>
+</html>

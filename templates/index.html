@@ -1,67 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Safe File Locker for Students 🔒</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Safe File Locker for Students 🔒</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
 
-<body>
-
-  <header class="hero">
-    <h1>🔐 Safe File Locker</h1>
-    <p>Learn how to protect your files while having fun! Built for students to explore cybersecurity safely.</p>
-  </header>
-
-  <section class="container">
-    <div class="intro">
-      <h2>🌟 What Does This App Do?</h2>
+  <body>
+    <header class="hero">
+      <h1>🔐 Safe File Locker</h1>
       <p>
-        This project helps students understand **encryption** — a way to lock files using secret keys or passwords.
-        You can upload a file, lock (encrypt) it, and later unlock (decrypt) it using your password or key file.
+        Learn how to protect your files while having fun! Built for students to
+        explore cybersecurity safely.
       </p>
-    </div>
+      <a href="/learn" class="learn-icon" title="Learn About Encryption!">
+        🎓 Learn Encryption
+      </a>
+    </header>
 
-    <div class="locker-card">
-      <h3>🧰 Try It Out</h3>
-      <p class="note">Your file stays on your computer — nothing is uploaded to the internet!</p>
+    <section class="container">
+      <div class="intro">
+        <h2>🌟 What Does This App Do?</h2>
+        <p>
+          This project helps students understand **encryption** — a way to lock
+          files using secret keys or passwords. You can upload a file, lock
+          (encrypt) it, and later unlock (decrypt) it using your password or key
+          file.
+        </p>
+      </div>
 
-      <form method="POST" action="/process" enctype="multipart/form-data" class="locker-form">
-        <label>📁 Choose File</label>
-        <input type="file" name="file" required>
+      <div class="locker-card">
+        <h3>🧰 Try It Out</h3>
+        <p class="note">
+          Your file stays on your computer — nothing is uploaded to the
+          internet!
+        </p>
 
-        <label>🔑 Password (optional)</label>
-        <input type="password" name="password" placeholder="Enter a fun secret password!">
+        <form
+          method="POST"
+          action="/process"
+          enctype="multipart/form-data"
+          class="locker-form"
+        >
+          <label>📁 Choose File</label>
+          <input type="file" name="file" required />
 
-        <label>🗝️ Or Upload Keyfile (.key)</label>
-        <input type="file" name="keyfile" accept=".key">
+          <label>🔑 Password (optional)</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter a fun secret password!"
+          />
 
-        <label>⚙️ What Do You Want To Do?</label>
-        <select name="action" required>
-          <option value="encrypt">🔒 Lock My File (Encrypt)</option>
-          <option value="decrypt">🔓 Unlock My File (Decrypt)</option>
-        </select>
+          <label>🗝️ Or Upload Keyfile (.key)</label>
+          <input type="file" name="keyfile" accept=".key" />
 
-        <button type="submit" class="btn-primary">🚀 Process My File</button>
-      </form>
+          <label>⚙️ What Do You Want To Do?</label>
+          <select name="action" required>
+            <option value="encrypt">🔒 Lock My File (Encrypt)</option>
+            <option value="decrypt">🔓 Unlock My File (Decrypt)</option>
+          </select>
 
-      <form method="GET" action="/generate-key">
-        <button type="submit" class="btn-secondary">🎲 Generate a Secret Keyfile</button>
-      </form>
-    </div>
+          <button type="submit" class="btn-primary">🚀 Process My File</button>
+        </form>
 
-    <div class="tip-box">
-      <p>💡 <strong>Tip:</strong> Keep your keyfile safe — if you lose it, you can’t unlock your files again!</p>
-    </div>
-  </section>
+        <form method="GET" action="/generate-key">
+          <button type="submit" class="btn-secondary">
+            🎲 Generate a Secret Keyfile
+          </button>
+        </form>
+      </div>
 
-  <footer>
-    <p>👩‍💻 Created by <strong>Mohammed Taha</strong> | Educational Cybersecurity Project</p>
-    <small>For learning purposes — no real data is sent or stored.</small>
-  </footer>
+      <div class="tip-box">
+        <p>
+          💡 <strong>Tip:</strong> Keep your keyfile safe — if you lose it, you
+          can’t unlock your files again!
+        </p>
+      </div>
+    </section>
 
-</body>
+    <footer>
+      <p>
+        👩‍💻 Created by <strong>Mohammed Taha</strong> | Educational Cybersecurity
+        Project
+      </p>
+      <small>For learning purposes — no real data is sent or stored.</small>
+    </footer>
+  </body>
 </html>
-

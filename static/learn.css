@@ -1,0 +1,143 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: #f5f9ff;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #004aad;
+  color: white;
+  padding: 15px 40px;
+}
+.navbar nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.navbar nav a:hover, .navbar nav a.active { color: #00f2fe; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  background: linear-gradient(120deg, #4facfe, #00f2fe);
+  color: white;
+  padding: 70px 20px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+/* Layout */
+.learn-lab {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+  padding: 40px;
+  text-align: center;
+}
+
+/* Panels */
+.info-panel h2 {
+  color: #004aad;
+  margin-bottom: 10px;
+}
+.info-panel p {
+  color: #555;
+  font-size: 1em;
+}
+
+.controls {
+  margin: 30px 0;
+  text-align: left;
+}
+.controls label {
+  display: block;
+  font-weight: 600;
+  color: #004aad;
+  margin-top: 15px;
+}
+.controls select, .controls input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #cfe0ff;
+  border-radius: 10px;
+  background: #f9fcff;
+  font-size: 1em;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+button {
+  background: linear-gradient(120deg, #004aad, #0077ff);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: linear-gradient(120deg, #0060c9, #00a8ff);
+  transform: translateY(-2px);
+}
+
+/* Result */
+.output-panel {
+  background: #eef6ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+  border: 2px dashed #a3c9ff;
+}
+.result-box {
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 50px;
+  color: #004aad;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Animations */
+.animation-zone {
+  position: relative;
+  height: 120px;
+  margin-top: 30px;
+}
+.animation-zone img {
+  width: 70px;
+  position: absolute;
+  bottom: 0;
+  transition: all 0.8s ease-in-out;
+}
+#lock { left: 10%; opacity: 1; }
+#unlock { right: 10%; opacity: 0; }
+#spark {
+  left: 50%;
+  top: 30%;
+  width: 50px;
+  opacity: 0;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background: #004aad;
+  color: white;
+  padding: 25px;
+  margin-top: 60px;
+}

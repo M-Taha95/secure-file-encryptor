@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberKids Encryption Adventure</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='game.css') }}"
+    />
+    <script defer src="{{ url_for('static', filename='game.js') }}"></script>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">🔐 CyberKids</div>
+      <nav>
+        <a href="/">🏠 Home</a>
+        <a href="/learn">🎓 Learn</a>
+        <a href="/game" class="active">🎮 Game</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>🎮 CyberKids Encryption Adventure</h1>
+      <p>Decode, Encrypt, and Save the Internet — one cipher at a time!</p>
+    </section>
+
+    <main class="game-wrapper">
+      <section class="game-info">
+        <h2 id="mission-title">Mission 1: Caesar Cipher</h2>
+        <p id="mission-desc">
+          Decrypt the message below by shifting letters back by 3.
+        </p>
+      </section>
+
+      <section class="game-area">
+        <div id="cipher-box" class="cipher-box">KHOOR</div>
+        <input type="text" id="answer" placeholder="Enter answer here..." />
+        <button id="submit-btn">✅ Submit</button>
+        <p id="feedback"></p>
+      </section>
+
+      <section class="status-bar">
+        <p>🌟 Stars: <span id="stars">0</span></p>
+        <p>
+          🔢 Level: <span id="level">1</span> / <span id="max-levels">∞</span>
+        </p>
+      </section>
+
+      <div class="animations">
+        <img
+          id="kid"
+          src="{{ url_for('static', filename='assets/kid.png') }}"
+          alt="Cyber Kid"
+        />
+        <img
+          id="spark"
+          src="{{ url_for('static', filename='assets/star.png') }}"
+          alt="Star Spark"
+        />
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 CyberKids | Educational Cybersecurity Game by Mohammed Taha</p>
+    </footer>
+  </body>
+</html>
