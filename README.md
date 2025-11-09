@@ -84,6 +84,10 @@ secure-file-encryptor/
 
 ```bash
 git clone https://github.com/M-Taha95/secure-file-encryptor.git
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4e21ec1 (update README.md / git clone)
 cd secure-file-encryptor
 
 2️⃣ Create and Activate Virtual Environment
