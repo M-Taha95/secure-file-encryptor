@@ -1,33 +1,63 @@
-# 🔐 Secure File Encryption & Decryption Tool
-
-### Protecting digital data through advanced cryptography — built with **Python** and **Flask**
+# 🔐 Secure File Encryption & Decryption Tool  
+### An Interactive Cybersecurity Learning Platform for Students — Built with **Python** and **Flask**
 
 ---
 
 ## 📘 Project Overview
 
-The **Secure File Encryption & Decryption Tool** is a cybersecurity project that demonstrates how cryptographic algorithms like **AES-GCM** and **PBKDF2** can protect sensitive data from unauthorized access.
+The **Secure File Encryption & Decryption Tool** is a complete cybersecurity learning platform that combines:
 
-It allows users to securely **encrypt and decrypt any file type** (documents, images, videos, or audio) through an intuitive web interface — ensuring confidentiality, integrity, and privacy.
+- Real AES-GCM file encryption  
+- A child-friendly educational experience  
+- Interactive animation-based cryptography lessons  
+- A casino-style cipher game with 20+ random challenges  
+- A leaderboard system for student motivation  
+
+This project is designed for school children and beginners who want to learn cybersecurity concepts in a fun, safe, and modern way.
+
+It demonstrates how cryptographic algorithms like **AES-GCM** and **PBKDF2** are used to secure sensitive files, using a clean and intuitive web interface.
 
 ---
 
 ## 🧠 Key Features
 
-- 🔒 **AES-GCM Encryption**
-  Industry-standard AES encryption with authentication for tamper-proof data protection.
+### 🔒 AES-GCM Encryption  
+Industry-standard AES encryption with authentication to prevent tampering.
 
-- 🔑 **Password & Keyfile Options**
-  Users can secure files using a password or a 32-byte symmetric key file.
+### 🔑 Password & Keyfile Support  
+Choose between:
+- Password-based encryption  
+- A 32-byte AES keyfile (`.key`)
 
-- 🧬 **Key Derivation with PBKDF2**
-  Transforms weak passwords into strong cryptographic keys using PBKDF2-HMAC-SHA256 with 390,000 iterations.
+### 🧬 PBKDF2-HMAC-SHA256  
+Secure password strengthening (390,000 iterations).
 
-- 💻 **Local-Only Processing**
-  All operations occur locally in memory — no data is transmitted or stored externally.
+### 💻 Local-Only Processing  
+All operations happen **on your own device** — nothing is uploaded.
 
-- 🧾 **Cross-Platform Compatibility**
-  Works seamlessly on Windows, macOS, and Linux.
+### 🎓 Learning Pages  
+- Cyber-Robot Academy  
+- Animated cipher explanations  
+- Caesar, ROT13, XOR, Atbash, Substitution  
+- Step-by-step transformation animations  
+
+### 🎰 Cipher Casino Game  
+- 20+ random encryption/decryption levels  
+- Difficulty scaling (Easy/Medium/Hard)  
+- Player avatars  
+- Unlockable badges  
+- One-chance gameplay  
+- Pop-up win/lose notifications  
+- Infinite new rounds  
+- Full interactive experience  
+
+### 🏆 Leaderboard System  
+- Saves top player scores  
+- Encourages friendly competition  
+- Perfect for classrooms  
+
+### 🧾 Cross-Platform  
+Works on **Windows**, **macOS**, and **Linux**.
 
 ---
 
@@ -36,144 +66,130 @@ It allows users to securely **encrypt and decrypt any file type** (documents, im
 | Category         | Technology                                               |
 | ---------------- | -------------------------------------------------------- |
 | **Backend**      | Python, Flask                                            |
-| **Cryptography** | AES-GCM (via `cryptography` library), PBKDF2-HMAC-SHA256 |
-| **Frontend**     | HTML5, CSS3                                              |
+| **Cryptography** | AES-GCM, PBKDF2-HMAC-SHA256 (`cryptography` library)     |
+| **Frontend**     | HTML5, CSS3, JavaScript                                  |
 | **Environment**  | `.env` configuration using `python-dotenv`               |
 
 ---
 
 ## ⚙️ How It Works
 
-You can use this app in **two modes**:
+The system supports two encryption flows:
 
-| Mode              | Description                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------- |
-| **Password Mode** | Encrypt or decrypt using a password (derived into a secure AES key).                           |
-| **Keyfile Mode**  | Use a pre-generated `.key` file containing a 32-byte Base64 key for encryption and decryption. |
+| Mode              | Description |
+| ----------------- | ----------- |
+| **Password Mode** | User-provided password is turned into a strong AES key using PBKDF2. |
+| **Keyfile Mode**  | A downloaded `.key` file containing a 32-byte AES key is used directly. |
 
-### 🔑 Generating a Keyfile
+### 🔑 Keyfile Generation
+Use the **“Generate New Keyfile”** button to download a secure AES keyfile.
 
-Click the **“Generate New Keyfile”** button in the app.
-A `.key` file will be downloaded automatically.
-Keep it safe — it’s required for decrypting files encrypted with that key.
-
----
-
-## 🧱 Project Structure
-
-secure-file-encryptor/
-│
-├── app.py # Main Flask backend
-├── crypto.py # AES encryption/decryption logic
-├── .env # Secret keys and admin credentials
-├── .gitignore # Hidden sensitive and cache files
-├── requirements.txt # Dependencies list
-├── README.md # Documentation
-│
-├── templates/
-│ └── index.html # Frontend web interface
-│
-└── static/
-└── style.css # Styling and layout
+Keep it safe — it is needed for decrypting files encrypted with that key.
 
 ---
 
-## 💡 Installation & Setup
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/M-Taha95/secure-file-encryptor.git
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e21ec1 (update README.md / git clone)
-cd secure-file-encryptor
-
-2️⃣ Create and Activate Virtual Environment
-
+#Create & Activate Virtual Environment
 Windows:
-
 python -m venv venv
 venv\Scripts\activate
 
-
 macOS / Linux:
-
 python -m venv venv
 source venv/bin/activate
 
-3️⃣ Install Dependencies
+#Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Configure .env
 
-Create a .env file in the root folder:
-
-SECRET_KEY=your_random_secret_here
-FERNET_KEY=your_generated_key_here
-ADMIN_USER=admin
-ADMIN_PASS=strongpassword123
-
-
-Generate the keys:
-
-python -c "import secrets; print(secrets.token_hex(16))"
-python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-
-5️⃣ Run the App
-python app.py
-
-
-Then open your browser and visit:
-
-http://127.0.0.1:5000
 
 🧩 Usage Guide
 🔐 Encrypt a File
 
-1. Upload your file (any type: .docx, .pdf, .jpg, .mp4, etc.).
+Upload any file (PDF, image, video, Word, etc.)
 
-2 . Enter a password or upload a keyfile.
+Enter password or upload keyfile
 
-3. Choose Encrypt → click Process File.
+Choose Encrypt
 
-4 . The encrypted file will download (filename ends with .enc).
+Download your encrypted .enc file
 
 🔓 Decrypt a File
 
-1. Upload the .enc file.
+Upload the .enc file
 
-2 .Use the same password or keyfile used during encryption.
+Use the same password or keyfile
 
-3 . Choose Decrypt → click Process File.
+Choose Decrypt
 
-4  . Your original file will be restored.
+Your original file is restored
 
 🔒 Security Notes
 
-The .key file must be kept safe — losing it means losing access to encrypted data.
+If you lose the .key file, the encrypted data cannot be recovered
 
-This tool performs local encryption only — no data is uploaded anywhere.
+All processing happens locally — nothing is uploaded
 
-Always use strong passwords for password-based encryption.
+Strong passwords increase security
 
+AES-GCM prevents tampering and ensures integrity
+
+🎮 Additional Features
+🎓 Cyber-Robot Academy
+
+Animated lessons
+
+Real-time cipher visualizations
+
+Caesar, XOR, ROT13, Atbash & Substitution
+
+Step-by-step walkthroughs
+
+Interactive “Try It” areas
+
+🎰 Cipher Casino Game
+
+20+ random algorithmic challenges per round
+
+Difficulty levels:
+
+Easy → Caesar, ROT13
+
+Medium → Caesar, ROT13, XOR, Atbash
+
+Hard → All + substitution
+
+Player avatars
+
+Unlockable badges
+
+One-attempt gameplay
+
+Pop-up win/lose feedback
+
+Infinite replayability
+
+🏆 Leaderboard Page
+
+Stores high scores
+
+Encourages friendly competition
+
+Great for the classroom or workshops
 
 📚 Future Improvements
 
-Add file compression before encryption.
+AES + RSA hybrid encryption
 
-Implement user authentication.
+File compression before encryption
 
-Enable hybrid AES + RSA encryption for key exchange.
+Multi-language UI (Arabic/English)
 
-Add a multi-language interface (English, Arabic).
+Teacher/Admin dashboard
 
+Online multiplayer cipher competitions
 
 👨‍💻 Author
 
 Mohammed Taha
-Cybersecurity Student — Applied Science University
-📅 Year: 2025
-
-```
+Cybersecurity Student — Applied Science Private University
+📅 2025
