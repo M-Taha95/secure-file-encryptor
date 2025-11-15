@@ -1,4 +1,4 @@
-# 🔐 Secure File Encryption & Decryption Tool  
+# 🔐 Secure File Encryption & Decryption Tool OR Edu-Crypto
 ### An Interactive Cybersecurity Learning Platform for Students — Built with **Python** and **Flask**
 
 ---
