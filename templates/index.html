@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Safe File Locker for Students 🔒</title>
+    <title>Cyber-Robot Academy | Safe File Locker 🔐</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -15,33 +16,66 @@
   </head>
 
   <body>
-    <header class="hero">
-      <h1>🔐 Safe File Locker</h1>
-      <p>
-        Learn how to protect your files while having fun! Built for students to
-        explore cybersecurity safely.
-      </p>
-      <a href="/learn" class="learn-icon" title="Learn About Encryption!">
-        🎓 Learn Encryption
-      </a>
-    </header>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <div class="nav-logo-chip">Edu</div>
+        <span class="nav-title">Edu-Crypto Academy</span>
+      </div>
 
-    <section class="container">
-      <div class="intro">
-        <h2>🌟 What Does This App Do?</h2>
+      <div class="nav-links">
+        <a href="/" class="nav-link active">🏠 Home</a>
+        <a href="/learn" class="nav-link">🎓 Learn</a>
+        <a href="/game" class="nav-link">🎰 Game</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Welcome, Young Agent! 🤖</h1>
         <p>
-          This project helps students understand **encryption** — a way to lock
-          files using secret keys or passwords. You can upload a file, lock
-          (encrypt) it, and later unlock (decrypt) it using your password or key
-          file.
+          Your mission begins here. Encrypt files, learn secret codes, and
+          master ciphers inside the Cyber-Robot Academy.
         </p>
       </div>
 
-      <div class="locker-card">
-        <h3>🧰 Try It Out</h3>
-        <p class="note">
-          Your file stays on your computer — nothing is uploaded to the
-          internet!
+      <div class="hero-robot">
+        <div class="robot-circle">🤖</div>
+        <div class="robot-bubble">
+          I’m Professor CipherBot — I’ll guide you in your encryption journey!
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <!-- Quick Navigation Cards -->
+      <section class="card nav-card">
+        <h2>🔍 Explore the Academy</h2>
+        <div class="nav-grid">
+          <a href="/learn" class="nav-item">
+            <div class="nav-icon">🎓</div>
+            <h3>Learn Encryption</h3>
+            <p>
+              Study five fun cipher systems with animations and robot
+              explanations.
+            </p>
+          </a>
+
+          <a href="/game" class="nav-item">
+            <div class="nav-icon">🎰</div>
+            <h3>Cipher Casino</h3>
+            <p>Guess the ciphers, earn rewards, and unlock badges!</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Safe File Locker -->
+      <section class="card locker-card">
+        <h2>🔐 Safe File Locker (Encrypt / Decrypt)</h2>
+        <p>
+          This tool keeps your files safe. Everything happens on your device —
+          nothing is uploaded.
         </p>
 
         <form
@@ -57,42 +91,31 @@
           <input
             type="password"
             name="password"
-            placeholder="Enter a fun secret password!"
+            placeholder="Enter a secret password"
           />
 
           <label>🗝️ Or Upload Keyfile (.key)</label>
           <input type="file" name="keyfile" accept=".key" />
 
-          <label>⚙️ What Do You Want To Do?</label>
+          <label>⚙️ Action</label>
           <select name="action" required>
-            <option value="encrypt">🔒 Lock My File (Encrypt)</option>
-            <option value="decrypt">🔓 Unlock My File (Decrypt)</option>
+            <option value="encrypt">🔒 Encrypt File</option>
+            <option value="decrypt">🔓 Decrypt File</option>
           </select>
 
-          <button type="submit" class="btn-primary">🚀 Process My File</button>
+          <button class="btn-primary">🚀 Process</button>
         </form>
 
         <form method="GET" action="/generate-key">
-          <button type="submit" class="btn-secondary">
-            🎲 Generate a Secret Keyfile
-          </button>
+          <button class="btn-secondary">🎲 Generate Keyfile</button>
         </form>
-      </div>
+      </section>
+    </main>
 
-      <div class="tip-box">
-        <p>
-          💡 <strong>Tip:</strong> Keep your keyfile safe — if you lose it, you
-          can’t unlock your files again!
-        </p>
-      </div>
-    </section>
-
-    <footer>
+    <footer class="footer">
       <p>
-        👩‍💻 Created by <strong>Mohammed Taha</strong> | Educational Cybersecurity
-        Project
+        Cyber-Robot Academy © 2025 — Created by <strong>ASU Students</strong>
       </p>
-      <small>For learning purposes — no real data is sent or stored.</small>
     </footer>
   </body>
 </html>

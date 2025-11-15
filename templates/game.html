@@ -3,69 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CyberKids Encryption Adventure</title>
+    <title>Cipher Casino 🎰 | Guess the Encryption!</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='game.css') }}"
     />
-    <script defer src="{{ url_for('static', filename='game.js') }}"></script>
   </head>
 
   <body>
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="logo">🔐 CyberKids</div>
-      <nav>
-        <a href="/">🏠 Home</a>
-        <a href="/learn">🎓 Learn</a>
-        <a href="/game" class="active">🎮 Game</a>
-      </nav>
+    <nav>
+      <a href="/" class="back-home">🏠 Home</a>
+    </nav>
+
+    <header class="header">
+      <div class="logo">
+        <div class="logo-chip">CC</div>
+        <div class="logo-text">
+          <h1>Cipher Casino</h1>
+          <p>Crack codes, win coins, unlock badges, and learn ciphers!</p>
+        </div>
+      </div>
+
+      <div class="avatar-select">
+        <span>Choose your avatar:</span>
+        <button class="avatar-btn" data-avatar="kid1">🧒</button>
+        <button class="avatar-btn" data-avatar="kid2">👧</button>
+        <button class="avatar-btn" data-avatar="robot">🤖</button>
+      </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1>🎮 CyberKids Encryption Adventure</h1>
-      <p>Decode, Encrypt, and Save the Internet — one cipher at a time!</p>
-    </section>
-
-    <main class="game-wrapper">
-      <section class="game-info">
-        <h2 id="mission-title">Mission 1: Caesar Cipher</h2>
-        <p id="mission-desc">
-          Decrypt the message below by shifting letters back by 3.
-        </p>
+    <main class="casino-wrapper">
+      <!-- Player & Score Panel -->
+      <section class="top-panel">
+        <div class="player-info">
+          <div class="avatar-display" id="avatar-display">🧒</div>
+          <div>
+            <div class="player-name">Player</div>
+            <a href="/leaderboard" class="leaderboard-link"
+              >📈 View Leaderboard</a
+            >
+          </div>
+        </div>
+        <div class="score-panel">
+          <div class="score-item">⭐ Score: <span id="score">0</span></div>
+          <div class="score-item">🔥 Streak: <span id="streak">0</span></div>
+          <div class="score-item">❤️ Lives: <span id="lives">5</span></div>
+        </div>
       </section>
 
-      <section class="game-area">
-        <div id="cipher-box" class="cipher-box">KHOOR</div>
-        <input type="text" id="answer" placeholder="Enter answer here..." />
-        <button id="submit-btn">✅ Submit</button>
-        <p id="feedback"></p>
+      <!-- Slot Machine + Encrypted Output -->
+      <section class="slot-section">
+        <div class="slot-machine">
+          <div class="slot-frame">
+            <div class="slot-screen spin-idle" id="slot-screen">
+              <div id="slot-word" class="slot-word">HELLO</div>
+            </div>
+          </div>
+
+          <button id="spin-btn" class="spin-btn">🎰 Spin!</button>
+        </div>
+
+        <div class="encrypted-box">
+          <h3>🔐 Encrypted Output</h3>
+          <div id="encrypted-result" class="encrypted-text">???</div>
+        </div>
       </section>
 
-      <section class="status-bar">
-        <p>🌟 Stars: <span id="stars">0</span></p>
-        <p>
-          🔢 Level: <span id="level">1</span> / <span id="max-levels">∞</span>
-        </p>
+      <!-- Guess & Mode Section -->
+      <section class="guess-section">
+        <h3>🧠 Which cipher was used for this spin?</h3>
+
+        <div class="mode-row">
+          <label class="difficulty-label">
+            Difficulty:
+            <select id="difficulty">
+              <option value="easy">Easy (Caesar, ROT13)</option>
+              <option value="medium">
+                Medium (Caesar, ROT13, XOR, Atbash)
+              </option>
+              <option value="hard">Hard (All ciphers)</option>
+            </select>
+          </label>
+
+          <label class="practice-toggle">
+            <input type="checkbox" id="practice-mode" />
+            Practice mode (∞ lives)
+          </label>
+        </div>
+
+        <div class="guess-row">
+          <select id="cipher-guess">
+            <option value="caesar">Caesar Cipher</option>
+            <option value="xor">XOR Cipher</option>
+            <option value="rot13">ROT13</option>
+            <option value="atbash">Atbash</option>
+            <option value="substitution">Random Substitution</option>
+          </select>
+
+          <button id="check-btn" class="check-btn">Check Answer</button>
+        </div>
+
+        <p id="feedback" class="feedback"></p>
       </section>
 
-      <div class="animations">
-        <img
-          id="kid"
-          src="{{ url_for('static', filename='assets/kid.png') }}"
-          alt="Cyber Kid"
-        />
-        <img
-          id="spark"
-          src="{{ url_for('static', filename='assets/star.png') }}"
-          alt="Star Spark"
-        />
-      </div>
+      <!-- Badges -->
+      <section class="badges-section">
+        <h3>🎁 Unlockable Badges</h3>
+        <div class="badges">
+          <div
+            class="badge"
+            id="badge-first-win"
+            title="Get your first correct guess"
+          >
+            🥉 <span>First Win</span>
+          </div>
+          <div class="badge" id="badge-3-streak" title="Reach 3 streak">
+            🥈 <span>Hot Streak</span>
+          </div>
+          <div class="badge" id="badge-5-streak" title="Reach 5 streak">
+            🥇 <span>On Fire</span>
+          </div>
+          <div class="badge" id="badge-100-score" title="Reach 100 score">
+            💎 <span>Pro Decoder</span>
+          </div>
+          <div
+            class="badge"
+            id="badge-all-ciphers"
+            title="Guess all cipher types at least once"
+          >
+            👑 <span>Cipher Master</span>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer>
-      <p>© 2025 CyberKids | Educational Cybersecurity Game by Mohammed Taha</p>
-    </footer>
+    <!-- Modal Popup -->
+    <div id="result-modal" class="modal hidden">
+      <div class="modal-content">
+        <h2 id="modal-title">Result</h2>
+        <p id="modal-message"></p>
+        <button id="modal-close">OK</button>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
   </body>
 </html>

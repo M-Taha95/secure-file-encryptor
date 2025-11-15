@@ -1,0 +1,66 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, #001a3e, #000814);
+  color: #fdfdfd;
+  margin: 0;
+  padding: 0;
+}
+
+.back-game {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  background: #ffd500;
+  color: #000;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 0 12px #ffd500aa;
+  z-index: 999;
+}
+
+.lb-header {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+.lb-header h1 {
+  color: #ffef8f;
+  text-shadow: 0 0 12px #ffda44;
+}
+
+.lb-main {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #001224;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 16px rgba(0,0,0,0.6);
+}
+.lb-table th, .lb-table td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.lb-table thead {
+  background: #002855;
+}
+.lb-table tbody tr:nth-child(even) {
+  background: #001a3e;
+}
+.lb-table tbody tr:nth-child(odd) {
+  background: #00152f;
+}
+
+.lb-note {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #d0ddffbb;
+}

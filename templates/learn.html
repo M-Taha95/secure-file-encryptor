@@ -1,70 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interactive Encryption Lab | CyberKids</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='learn.css') }}">
-  <script defer src="{{ url_for('static', filename='learn.js') }}"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber-Robot Academy 🔐 | Learn Encryption</title>
 
-<body>
-  <header class="navbar">
-    <div class="logo">🔐 CyberKids</div>
-    <nav>
-      <a href="/">🏠 Home</a>
-      <a href="/learn" class="active">🎓 Learn</a>
-      <a href="/game">🎮 Game</a>
-    </nav>
-  </header>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='learn.css') }}"
+    />
+  </head>
 
-  <section class="hero">
-    <h1>🎓 Interactive Encryption Lab</h1>
-    <p>Learn by doing — experiment with encryption, decryption, and secret keys!</p>
-  </section>
-
-  <main class="learn-lab">
-    <div class="info-panel">
-      <h2 id="algo-title">🔠 Caesar Cipher</h2>
-      <p id="algo-desc">In Caesar Cipher, each letter is shifted a few places. A = D if shift = 3!</p>
-    </div>
-
-    <div class="controls">
-      <label>Choose Algorithm:</label>
-      <select id="algorithm">
-        <option value="caesar">Caesar Cipher</option>
-        <option value="xor">XOR Cipher</option>
-        <option value="reverse">Reverse Cipher</option>
-        <option value="base64">Base64 Encoding</option>
-        <option value="rot13">ROT13 Substitution</option>
-      </select>
-
-      <label>Key (only for Caesar or XOR):</label>
-      <input type="number" id="key" placeholder="e.g. 3" value="3">
-
-      <label>Enter Your Message:</label>
-      <input type="text" id="message" placeholder="Type your secret message...">
-
-      <div class="buttons">
-        <button id="encrypt">🔒 Encrypt</button>
-        <button id="decrypt">🔓 Decrypt</button>
+  <body>
+    <!-- Top navigation -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <div class="nav-logo-chip">Edu</div>
+        <span class="nav-title">Edu-Crypto Academy</span>
       </div>
-    </div>
+      <div class="nav-links">
+        <a href="/" class="nav-link">🏠 Home</a>
+        <a href="/learn" class="nav-link active">🎓 Learn</a>
+        <a href="/game" class="nav-link">🎰 Game</a>
+      </div>
+    </nav>
 
-    <div class="output-panel">
-      <h3>Result:</h3>
-      <div id="result" class="result-box">Your encrypted/decrypted message will appear here</div>
-    </div>
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Meet Professor CipherBot 🤖</h1>
+        <p>
+          Welcome, young agent! Today you’ll learn how to hide secret messages
+          using fun encryption tricks.
+        </p>
+        <p class="hero-sub">
+          We’ll explore 5 ciphers: <strong>Caesar</strong>,
+          <strong>XOR</strong>, <strong>ROT13</strong>, <strong>Atbash</strong>,
+          and <strong>Substitution</strong>.
+        </p>
+      </div>
 
-    <div class="animation-zone">
-      <img src="{{ url_for('static', filename='assets/lock.png') }}" alt="Lock" id="lock">
-      <img src="{{ url_for('static', filename='assets/unlock.png') }}" alt="Unlock" id="unlock">
-      <img src="{{ url_for('static', filename='assets/spark.gif') }}" alt="Spark" id="spark">
-    </div>
-  </main>
+      <div class="hero-robot">
+        <!-- You can replace with an actual image: static/img/professor-bot.png -->
+        <div class="robot-circle">🤖</div>
+        <div class="robot-bubble" id="robot-bubble">
+          Hi! I’m Professor CipherBot. Click a cipher below and I’ll explain it!
+        </div>
+      </div>
+    </header>
 
-  <footer>
-    <p>© 2025 CyberKids | Interactive Encryption Learning Platform by Mohammed Taha</p>
-  </footer>
-</body>
+    <main class="main-container">
+      <!-- Section: What is encryption -->
+      <section class="card intro-card">
+        <h2>🔐 What is Encryption?</h2>
+        <p>
+          Encryption is like writing in a secret language. You take a normal
+          message (called <strong>plaintext</strong>) and change it into a
+          scrambled message (called <strong>ciphertext</strong>). Only someone
+          with the secret key can turn it back!
+        </p>
+        <p>
+          In this academy, you’ll see how different ciphers transform the same
+          word in different ways.
+        </p>
+      </section>
+
+      <!-- Section: Cipher tabs + explanation -->
+      <section class="card ciphers-card">
+        <h2>📚 Learn the Ciphers</h2>
+
+        <div class="cipher-tabs">
+          <button class="cipher-tab active" data-cipher="caesar">Caesar</button>
+          <button class="cipher-tab" data-cipher="xor">XOR</button>
+          <button class="cipher-tab" data-cipher="rot13">ROT13</button>
+          <button class="cipher-tab" data-cipher="atbash">Atbash</button>
+          <button class="cipher-tab" data-cipher="substitution">
+            Substitution
+          </button>
+        </div>
+
+        <div class="cipher-content">
+          <h3 id="cipher-title">Caesar Cipher</h3>
+          <p id="cipher-description">
+            Caesar Cipher shifts each letter forward by a number (the key). If
+            the key is 3, A→D, B→E, C→F. When you reach Z, you wrap around back
+            to A.
+          </p>
+
+          <div class="example-row">
+            <div>
+              <p class="example-label">Example:</p>
+              <p id="cipher-example">HELLO with key 3 ➝ KHOOR</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section: Visual letter lab -->
+      <section class="card visual-card">
+        <h2>🧪 Visual Letter Lab</h2>
+        <p>
+          Type a word, pick a cipher, choose a key (if needed) and watch each
+          letter move through CipherBot’s machine.
+        </p>
+
+        <div class="lab-controls">
+          <input type="text" id="vis-text" value="HELLO" maxlength="16" />
+
+          <select id="vis-algo">
+            <option value="caesar">Caesar</option>
+            <option value="xor">XOR</option>
+            <option value="rot13">ROT13</option>
+            <option value="atbash">Atbash</option>
+            <option value="substitution">Substitution</option>
+          </select>
+
+          <input type="number" id="vis-key" value="3" min="1" max="25" />
+          <button id="vis-run">▶ Animate</button>
+        </div>
+
+        <div class="vis-pipeline">
+          <div class="vis-stage">
+            <h3>Plaintext</h3>
+            <div id="vis-plain" class="vis-row"></div>
+          </div>
+
+          <div class="vis-machine">
+            <span class="machine-icon">🔐</span>
+            <p id="vis-status">Waiting…</p>
+          </div>
+
+          <div class="vis-stage">
+            <h3>Result</h3>
+            <div id="vis-result" class="vis-row"></div>
+          </div>
+        </div>
+
+        <p id="vis-explain" class="vis-explain">
+          Caesar Cipher: each letter moves forward by the key amount.
+        </p>
+      </section>
+
+      <!-- Section: Mini quiz -->
+      <section class="card quiz-card">
+        <h2>📝 Mini Quiz with CipherBot</h2>
+        <p>
+          CipherBot will encrypt a word using one of the ciphers. Your mission:
+          guess which cipher was used!
+        </p>
+
+        <div class="quiz-panel">
+          <div class="quiz-row">
+            <div>
+              <p>Plaintext word:</p>
+              <div id="quiz-plain" class="quiz-box">SECRET</div>
+            </div>
+            <div>
+              <p>Ciphertext:</p>
+              <div id="quiz-cipher" class="quiz-box quiz-cipher">??????</div>
+            </div>
+          </div>
+
+          <div class="quiz-controls">
+            <button id="quiz-new">🔁 New Question</button>
+
+            <select id="quiz-guess">
+              <option value="caesar">Caesar</option>
+              <option value="xor">XOR</option>
+              <option value="rot13">ROT13</option>
+              <option value="atbash">Atbash</option>
+              <option value="substitution">Substitution</option>
+            </select>
+
+            <button id="quiz-check">✅ Check</button>
+          </div>
+
+          <p id="quiz-feedback" class="quiz-feedback"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='learn.js') }}"></script>
+  </body>
 </html>

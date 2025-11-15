@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cipher Casino Leaderboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='leaderboard.css') }}"
+    />
+  </head>
+  <body>
+    <a href="/game" class="back-game">🎰 Back to Game</a>
+
+    <header class="lb-header">
+      <h1>📈 Cipher Casino Leaderboard</h1>
+      <p>Top scores from this browser</p>
+    </header>
+
+    <main class="lb-main">
+      <table class="lb-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Avatar</th>
+            <th>Score</th>
+            <th>Mode</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body">
+          <!-- filled by JS -->
+        </tbody>
+      </table>
+
+      <p class="lb-note">
+        Leaderboard is stored locally in your browser (no data is uploaded).
+      </p>
+    </main>
+
+    <script src="{{ url_for('static', filename='leaderboard.js') }}"></script>
+  </body>
+</html>

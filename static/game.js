@@ -1,140 +1,310 @@
 document.addEventListener("DOMContentLoaded", () => {
-  let stars = 0;
-  let level = 0;
-  let missions = [];
 
-  const missionTitle = document.getElementById("mission-title");
-  const missionDesc = document.getElementById("mission-desc");
-  const cipherBox = document.getElementById("cipher-box");
-  const answerInput = document.getElementById("answer");
-  const submitBtn = document.getElementById("submit-btn");
+  // Elements
+  const slotWord = document.getElementById("slot-word");
+  const slotScreen = document.getElementById("slot-screen");
+  const encryptedResult = document.getElementById("encrypted-result");
+  const spinBtn = document.getElementById("spin-btn");
+  const guessSelect = document.getElementById("cipher-guess");
+  const checkBtn = document.getElementById("check-btn");
   const feedback = document.getElementById("feedback");
-  const starsDisplay = document.getElementById("stars");
-  const levelDisplay = document.getElementById("level");
-  const maxDisplay = document.getElementById("max-levels");
-  const kid = document.getElementById("kid");
-  const spark = document.getElementById("spark");
 
-  const words = [
-    "HELLO", "WORLD", "CODE", "HACK", "CYBER", "LEARN", "SAFE", "LOCK",
-    "DATA", "SECURE", "ENCRYPT", "DECRYPT", "PASSWORD", "NETWORK", "CLOUD",
-    "ACCESS", "GUARD", "PYTHON", "FLASK", "KEY"
-  ];
+  const scoreBox = document.getElementById("score");
+  const streakBox = document.getElementById("streak");
+  const livesBox = document.getElementById("lives");
 
-  const algorithms = ["caesar", "xor", "reverse", "base64", "substitution"];
+  const difficultySelect = document.getElementById("difficulty");
+  const practiceCheckbox = document.getElementById("practice-mode");
 
-  // --- Generate Random Mission List ---
-  function generateMissions() {
-    const missions = [];
-    for (let i = 0; i < 20; i++) {
-      const word = words[Math.floor(Math.random() * words.length)];
-      const algo = algorithms[Math.floor(Math.random() * algorithms.length)];
-      const key = Math.floor(Math.random() * 5) + 1;
-      const cipher = encryptWord(word, algo, key);
-      const mode = Math.random() > 0.5 ? "encrypt" : "decrypt";
-      missions.push({ algo, word, cipher, key, mode });
-    }
-    return missions;
+  const avatarButtons = document.querySelectorAll(".avatar-btn");
+  const avatarDisplay = document.getElementById("avatar-display");
+
+  const badgeFirst = document.getElementById("badge-first-win");
+  const badge3 = document.getElementById("badge-3-streak");
+  const badge5 = document.getElementById("badge-5-streak");
+  const badge100 = document.getElementById("badge-100-score");
+  const badgeAll = document.getElementById("badge-all-ciphers");
+
+  const modal = document.getElementById("result-modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalMessage = document.getElementById("modal-message");
+  const modalClose = document.getElementById("modal-close");
+
+  // Game state
+  const words = ["ROBOT", "APPLE", "MAGIC", "HELLO", "DRAGON", "CIPHER", "CODE", "BRAIN", "HAPPY", "TIGER", "SECRET", "LOCK", "TREASURE"];
+  const usedCiphers = new Set();
+
+  let currentCipher = "";
+  let currentWord = "";
+  let currentEncrypted = "";
+
+  let score = 0;
+  let streak = 0;
+  let lives = 5;
+
+  let roundActive = false; // ensures one chance per spin
+  let difficulty = "easy";
+  let practiceMode = false;
+
+  // ----------------------------
+  // Avatar handling
+  // ----------------------------
+  function setAvatar(emoji) {
+    avatarDisplay.textContent = emoji;
+    localStorage.setItem("cipherCasinoAvatar", emoji);
   }
 
-  // --- Algorithms ---
-  function caesarEncrypt(text, shift) {
-    return text.split("").map(ch => {
-      if (/[A-Z]/.test(ch)) {
-        const base = 65;
-        return String.fromCharCode((ch.charCodeAt(0) - base + shift + 26) % 26 + base);
-      }
-      return ch;
-    }).join("");
-  }
+  avatarButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      avatarButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-  function xorEncrypt(text, key) {
-    return text.split("").map(ch => String.fromCharCode(ch.charCodeAt(0) ^ key)).join("");
-  }
+      const type = btn.dataset.avatar;
+      if (type === "kid1") setAvatar("🧒");
+      else if (type === "kid2") setAvatar("👧");
+      else setAvatar("🤖");
+    });
+  });
 
-  function encryptWord(word, algo, key) {
-    switch (algo) {
-      case "caesar": return caesarEncrypt(word, key);
-      case "xor": return xorEncrypt(word, key);
-      case "reverse": return word.split("").reverse().join("");
-      case "base64": return btoa(word);
-      case "substitution": // ROT13
-        return word.replace(/[A-Z]/g, c => String.fromCharCode(((c.charCodeAt(0) - 65 + 13) % 26) + 65));
-      default: return word;
-    }
-  }
-
-  function decryptWord(cipher, algo, key) {
-    switch (algo) {
-      case "caesar": return caesarEncrypt(cipher, -key);
-      case "xor": return xorEncrypt(cipher, key);
-      case "reverse": return cipher.split("").reverse().join("");
-      case "base64": try { return atob(cipher); } catch { return ""; }
-      case "substitution":
-        return cipher.replace(/[A-Z]/g, c => String.fromCharCode(((c.charCodeAt(0) - 65 + 13) % 26) + 65));
-      default: return cipher;
-    }
-  }
-
-  // --- Animations ---
-  function playAnimation() {
-    kid.style.left = "80%";
-    spark.style.opacity = "1";
-    setTimeout(() => {
-      kid.style.left = "0";
-      spark.style.opacity = "0";
-    }, 1000);
-  }
-
-  // --- Load Level ---
-  function loadLevel() {
-    if (level >= missions.length) {
-      // restart with new set
-      missions = generateMissions();
-      level = 0;
-    }
-    const m = missions[level];
-    const showCipher = m.mode === "decrypt";
-    cipherBox.textContent = showCipher ? m.cipher : m.word;
-
-    missionTitle.textContent = `Mission ${level + 1}: ${m.algo.toUpperCase()} (${m.mode.toUpperCase()})`;
-    missionDesc.textContent =
-      m.mode === "decrypt"
-        ? `Decrypt this message using ${m.algo} (key ${m.key}).`
-        : `Encrypt this word using ${m.algo} (key ${m.key}).`;
-
-    feedback.textContent = "";
-    answerInput.value = "";
-    levelDisplay.textContent = level + 1;
-    maxDisplay.textContent = missions.length;
-  }
-
-  // --- Submit Answer ---
-  submitBtn.addEventListener("click", () => {
-    const m = missions[level];
-    const userAnswer = answerInput.value.trim().toUpperCase();
-    if (!userAnswer) return;
-
-    const expected =
-      m.mode === "decrypt"
-        ? decryptWord(m.cipher, m.algo, m.key).toUpperCase()
-        : encryptWord(m.word, m.algo, m.key).toUpperCase();
-
-    if (userAnswer === expected) {
-      stars++;
-      starsDisplay.textContent = stars;
-      feedback.textContent = "✅ Great job! Next challenge loading...";
-      feedback.style.color = "#009c24";
-      playAnimation();
-      level++;
-      setTimeout(loadLevel, 1200);
-    } else {
-      feedback.textContent = "❌ Wrong answer, try again!";
-      feedback.style.color = "#d11";
+  const savedAvatar = localStorage.getItem("cipherCasinoAvatar") || "🧒";
+  setAvatar(savedAvatar);
+  avatarButtons.forEach(btn => {
+    if (
+      (btn.dataset.avatar === "kid1" && savedAvatar === "🧒") ||
+      (btn.dataset.avatar === "kid2" && savedAvatar === "👧") ||
+      (btn.dataset.avatar === "robot" && savedAvatar === "🤖")
+    ) {
+      btn.classList.add("active");
     }
   });
 
-  // Initialize
-  missions = generateMissions();
-  loadLevel();
+  // ----------------------------
+  // Difficulty & practice
+  // ----------------------------
+  difficultySelect.addEventListener("change", () => {
+    difficulty = difficultySelect.value;
+  });
+  difficulty = difficultySelect.value;
+
+  practiceCheckbox.addEventListener("change", () => {
+    practiceMode = practiceCheckbox.checked;
+  });
+  practiceMode = practiceCheckbox.checked;
+
+  function getCipherPool() {
+    if (difficulty === "easy") {
+      return ["caesar", "rot13"];
+    }
+    if (difficulty === "medium") {
+      return ["caesar", "rot13", "xor", "atbash"];
+    }
+    // hard
+    return ["caesar", "xor", "rot13", "atbash", "substitution"];
+  }
+
+  // Utility: random word
+  function randomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+  }
+
+  // Cipher functions
+  function caesar(text, shift) {
+    return text.replace(/[A-Z]/g, c =>
+      String.fromCharCode(((c.charCodeAt(0) - 65 + shift) % 26) + 65)
+    );
+  }
+
+  function xorCipher(text, key = 5) {
+    return text.split("").map(ch => {
+      const code = (ch.charCodeAt(0) ^ key) % 26;
+      return String.fromCharCode(65 + code);
+    }).join("");
+  }
+
+  function rot13(text) {
+    return text.replace(/[A-Za-z]/g, c =>
+      String.fromCharCode(
+        c.charCodeAt(0) + (c.toLowerCase() < 'n' ? 13 : -13)
+      )
+    );
+  }
+
+  function atbash(text) {
+    return text.replace(/[A-Z]/g, c =>
+      String.fromCharCode(90 - (c.charCodeAt(0) - 65))
+    );
+  }
+
+  function randomSubstitution(text) {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let shuffled = alphabet.split("").sort(() => Math.random() - 0.5).join("");
+    return text.split("").map(ch => shuffled[alphabet.indexOf(ch)]).join("");
+  }
+
+  function encrypt(word, cipher) {
+    switch (cipher) {
+      case "caesar":       return caesar(word, 3);
+      case "xor":          return xorCipher(word, 7);
+      case "rot13":        return rot13(word);
+      case "atbash":       return atbash(word);
+      case "substitution": return randomSubstitution(word);
+    }
+  }
+
+  // ----------------------------
+  // Score UI
+  // ----------------------------
+  function updateScoreUI() {
+    scoreBox.textContent = score;
+    streakBox.textContent = streak;
+    livesBox.textContent = lives;
+  }
+
+  // ----------------------------
+  // Modal helpers
+  // ----------------------------
+  function showModal(title, msg) {
+    modalTitle.textContent = title;
+    modalMessage.textContent = msg;
+    modal.classList.remove("hidden");
+  }
+
+  modalClose.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  function cipherName(c) {
+    switch (c) {
+      case "caesar": return "Caesar Cipher";
+      case "xor": return "XOR Cipher";
+      case "rot13": return "ROT13";
+      case "atbash": return "Atbash";
+      case "substitution": return "Random Substitution";
+      default: return c;
+    }
+  }
+
+  // ----------------------------
+  // Badges
+  // ----------------------------
+  function unlockBadge(el) {
+    el.classList.add("unlocked");
+  }
+
+  function updateBadges() {
+    if (score >= 10) unlockBadge(badgeFirst);
+    if (streak >= 3) unlockBadge(badge3);
+    if (streak >= 5) unlockBadge(badge5);
+    if (score >= 100) unlockBadge(badge100);
+
+    const all = ["caesar", "xor", "rot13", "atbash", "substitution"];
+    if (all.every(c => usedCiphers.has(c))) {
+      unlockBadge(badgeAll);
+    }
+  }
+
+  // ----------------------------
+  // Leaderboard (localStorage)
+  // ----------------------------
+  function updateLeaderboard() {
+    const avatar = avatarDisplay.textContent || "🧒";
+    const entry = {
+      score,
+      avatar,
+      date: new Date().toISOString(),
+      difficulty,
+      practice: practiceMode
+    };
+
+    let board = JSON.parse(localStorage.getItem("cipherCasinoLeaderboard") || "[]");
+    board.push(entry);
+    board.sort((a, b) => b.score - a.score);
+    board = board.slice(0, 10);
+    localStorage.setItem("cipherCasinoLeaderboard", JSON.stringify(board));
+  }
+
+  // ----------------------------
+  // Spin button
+  // ----------------------------
+  spinBtn.addEventListener("click", () => {
+    if (roundActive) return;
+
+    feedback.textContent = "";
+    encryptedResult.textContent = "???";
+
+    slotScreen.classList.remove("spin-anim");
+    void slotScreen.offsetWidth;
+    slotScreen.classList.add("spin-anim");
+
+    spinBtn.disabled = true;
+    checkBtn.disabled = false;
+
+    setTimeout(() => {
+      currentWord = randomWord();
+      slotWord.textContent = currentWord;
+
+      const pool = getCipherPool();
+      currentCipher = pool[Math.floor(Math.random() * pool.length)];
+      usedCiphers.add(currentCipher);
+
+      currentEncrypted = encrypt(currentWord, currentCipher);
+      encryptedResult.textContent = currentEncrypted;
+
+      roundActive = true;
+    }, 600);
+  });
+
+  // ----------------------------
+  // Check button — ONE chance
+  // ----------------------------
+  checkBtn.addEventListener("click", () => {
+    if (!roundActive || !currentWord) return;
+
+    roundActive = false;
+    spinBtn.disabled = false;
+    checkBtn.disabled = true;
+
+    const guess = guessSelect.value;
+    const correct = (guess === currentCipher);
+
+    if (correct) {
+      score += 10;
+      streak++;
+      feedback.style.color = "#00ff99";
+      feedback.textContent = "Correct! ⭐";
+      showModal("You Win! 🎉", `Correct! The cipher was ${cipherName(currentCipher)}.`);
+    } else {
+      feedback.style.color = "#ff6666";
+      feedback.textContent = "Wrong!";
+
+      if (!practiceMode) {
+        streak = 0;
+        lives--;
+      }
+
+      showModal(
+        "Oops! ❌",
+        `That was incorrect. The correct cipher was ${cipherName(currentCipher)}.`
+      );
+    }
+
+    updateScoreUI();
+    updateBadges();
+    updateLeaderboard();
+
+    if (!practiceMode && lives <= 0) {
+      showModal(
+        "Game Over 💔",
+        `You lost all lives. Final score: ${score}. Starting a new game!`
+      );
+      score = 0;
+      streak = 0;
+      lives = 5;
+      updateScoreUI();
+    }
+  });
+
+  // init
+  updateScoreUI();
+  checkBtn.disabled = true;
 });
