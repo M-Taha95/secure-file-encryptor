@@ -1,9 +1,9 @@
-# 🔐 Secure File Encryption & Decryption Tool OR Edu-Crypto
+# Secure File Encryption & Decryption Tool OR Edu-Crypto
 ### An Interactive Cybersecurity Learning Platform for Students — Built with **Python** and **Flask**
 
 ---
 
-## 📘 Project Overview
+## Project Overview
 
 The **Secure File Encryption & Decryption Tool** is a complete cybersecurity learning platform that combines:
 
@@ -19,29 +19,29 @@ It demonstrates how cryptographic algorithms like **AES-GCM** and **PBKDF2** are
 
 ---
 
-## 🧠 Key Features
+## Key Features
 
-### 🔒 AES-GCM Encryption  
+### AES-GCM Encryption  
 Industry-standard AES encryption with authentication to prevent tampering.
 
-### 🔑 Password & Keyfile Support  
+### Password & Keyfile Support  
 Choose between:
 - Password-based encryption  
 - A 32-byte AES keyfile (`.key`)
 
-### 🧬 PBKDF2-HMAC-SHA256  
+### PBKDF2-HMAC-SHA256  
 Secure password strengthening (390,000 iterations).
 
-### 💻 Local-Only Processing  
+### Local-Only Processing  
 All operations happen **on your own device** — nothing is uploaded.
 
-### 🎓 Learning Pages  
+### Learning Pages  
 - Cyber-Robot Academy  
 - Animated cipher explanations  
 - Caesar, ROT13, XOR, Atbash, Substitution  
 - Step-by-step transformation animations  
 
-### 🎰 Cipher Casino Game  
+### Cipher Casino Game  
 - 20+ random encryption/decryption levels  
 - Difficulty scaling (Easy/Medium/Hard)  
 - Player avatars  
@@ -51,17 +51,17 @@ All operations happen **on your own device** — nothing is uploaded.
 - Infinite new rounds  
 - Full interactive experience  
 
-### 🏆 Leaderboard System  
+### Leaderboard System  
 - Saves top player scores  
 - Encourages friendly competition  
 - Perfect for classrooms  
 
-### 🧾 Cross-Platform  
+### Cross-Platform  
 Works on **Windows**, **macOS**, and **Linux**.
 
 ---
 
-## 🧩 Technical Stack
+## Technical Stack
 
 | Category         | Technology                                               |
 | ---------------- | -------------------------------------------------------- |
@@ -72,7 +72,7 @@ Works on **Windows**, **macOS**, and **Linux**.
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 The system supports two encryption flows:
 
@@ -81,7 +81,7 @@ The system supports two encryption flows:
 | **Password Mode** | User-provided password is turned into a strong AES key using PBKDF2. |
 | **Keyfile Mode**  | A downloaded `.key` file containing a 32-byte AES key is used directly. |
 
-### 🔑 Keyfile Generation
+### Keyfile Generation
 Use the **“Generate New Keyfile”** button to download a secure AES keyfile.
 
 Keep it safe — it is needed for decrypting files encrypted with that key.
@@ -102,8 +102,8 @@ pip install -r requirements.txt
 
 
 
-🧩 Usage Guide
-🔐 Encrypt a File
+ Usage Guide
+ Encrypt a File
 
 Upload any file (PDF, image, video, Word, etc.)
 
@@ -113,7 +113,7 @@ Choose Encrypt
 
 Download your encrypted .enc file
 
-🔓 Decrypt a File
+# Decrypt a File
 
 Upload the .enc file
 
@@ -123,7 +123,7 @@ Choose Decrypt
 
 Your original file is restored
 
-🔒 Security Notes
+# Security Notes
 
 If you lose the .key file, the encrypted data cannot be recovered
 
@@ -133,8 +133,8 @@ Strong passwords increase security
 
 AES-GCM prevents tampering and ensures integrity
 
-🎮 Additional Features
-🎓 Cyber-Robot Academy
+# Additional Features
+# Cyber-Robot Academy
 
 Animated lessons
 
@@ -146,7 +146,7 @@ Step-by-step walkthroughs
 
 Interactive “Try It” areas
 
-🎰 Cipher Casino Game
+# Cipher Casino Game
 
 20+ random algorithmic challenges per round
 
@@ -168,7 +168,7 @@ Pop-up win/lose feedback
 
 Infinite replayability
 
-🏆 Leaderboard Page
+# Leaderboard Page
 
 Stores high scores
 
@@ -176,7 +176,7 @@ Encourages friendly competition
 
 Great for the classroom or workshops
 
-📚 Future Improvements
+#Future Improvements
 
 AES + RSA hybrid encryption
 
@@ -188,8 +188,8 @@ Teacher/Admin dashboard
 
 Online multiplayer cipher competitions
 
-👨‍💻 Author
+# Author
 
 Mohammed Taha
 Cybersecurity Student — Applied Science Private University
-📅 2025
+ 2025
