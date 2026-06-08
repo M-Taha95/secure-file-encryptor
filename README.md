@@ -190,6 +190,6 @@ Online multiplayer cipher competitions
 
 # Author
 
-Mohammed Taha
+Mohammed Taha -
 Cybersecurity Student — Applied Science Private University
  2025
